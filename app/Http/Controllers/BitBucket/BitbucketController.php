@@ -11,7 +11,7 @@ use App\Repos;
 
 class BitbucketController extends ApiController
 {
-    
+
 	protected $bitbucket;
 
     public function __construct(BitbucketManager $bitbucket)
@@ -19,7 +19,7 @@ class BitbucketController extends ApiController
         $this->bitbucket = $bitbucket;
         Bitbucket::connection('alternative')->api('User')->emails();
     }
-	    
+
 
     public function index()
     {

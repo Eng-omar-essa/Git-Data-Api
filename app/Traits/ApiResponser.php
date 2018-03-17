@@ -12,11 +12,11 @@ use App\Transformers\GitLabTransformer;
 use App\Transformers\RepoTransformer;
 use Illuminate\Support\Facades\Route;
 /***
-* @author Omar Issa 
-* This is an Api Response used by all controller. Main Objective of this class is serve  * response for all request that handel by controller. 
+* @author Omar Issa
+* This is an Api Response used by all controller. Main Objective of this class is serve  * response for all request that handel by controller.
 * This class have all method for sort , filter, pagniate and cahce response too.
-* 
-* @return response object 
+*
+* @return response object
 *   @response {
 *  data: [],
 *}
@@ -35,9 +35,9 @@ trait ApiResponser
 	}
 
 	/**
-	* This function used to showall response. 
+	* This function used to showall response.
 	* @param $data collection , status code
-	* @return response filtered , reponsed and paginated.  
+	* @return response filtered , reponsed and paginated.
 	*/
 	protected function showAll(Collection $collection, $code = 200)
 	{
@@ -55,7 +55,7 @@ trait ApiResponser
 		$collection = $this->sortData($collection, $transformer);
 		$collection = $this->paginate($collection);
 		$collection = $this->transformData($collection,$transformer);
-		// $collection = $this->cacheResponse($collection);		
+		// $collection = $this->cacheResponse($collection);
 
 		return $this->successResponse($collection, $code);
 	}
@@ -75,9 +75,9 @@ trait ApiResponser
 	}
 
 	/**
-	* This function used to filter response. 
-	* @param $data collection , $tranformer object 
-	* @return collection object 
+	* This function used to filter response.
+	* @param $data collection , $tranformer object
+	* @return collection object
 	*/
 	protected function filterData(Collection $collection, $transformer)
 	{
@@ -103,9 +103,9 @@ trait ApiResponser
 	}
 
 	/**
-	* This function used to pafinate  response. 
-	* @param $collection 
-	* @return pagination object 
+	* This function used to pafinate  response.
+	* @param $collection
+	* @return pagination object
 	*/
 	protected function paginate(Collection $collection)
 	{
@@ -135,21 +135,21 @@ trait ApiResponser
 	}
 
 	/**
-	* This function used to transform response. 
+	* This function used to transform response.
 	* @param $data collection , $transformer object
-	* @return array object  
+	* @return array object
 	*/
 	protected function transformData($data,$transformer)
 	{
-	
+
 		$transformation = fractal($data, new $transformer);
 
 		return $transformation->toArray();
 	}
 	/**
-	* This function used to chache response. 
-	* @param $data collection 
-	* @return Chache object 
+	* This function used to chache response.
+	* @param $data collection
+	* @return Chache object
 	*/
 	protected function cacheResponse($data)
 	{

@@ -26,19 +26,19 @@ class GitController extends ApiController
     	$repos_ =[];
     	try{
     	$repos_ =$this->gitlab->api('projects')->all();
-    	$repos = gitlabModel::Repo_info($repos_);
+    	$repos = gitlabModel->Repo_info($repos_);
        return $this->showAll(collect($repos));
      	} catch (\RuntimeException $e) {
             $this->handleAPIException($e);
        }
-    	
+
     }
 
     public function get_files($id){
 
     	try{
     	$repos =$this->gitlab->api('repo')->getFile($id,'.','master');
-   
+
     	if($repos == Null){
     		return $this->errorResponse(collect($repos));
     	}
@@ -53,10 +53,10 @@ class GitController extends ApiController
 	    {
 	    	try{
 	    		$repos =$this->gitlab->api('projects')->show($id);
-	    	return $this->showAll(collect($repos)); 
+	    	return $this->showAll(collect($repos));
 	    } catch (\RuntimeException $e) {
 	            $this->handleAPIException($e);
 	       }
 	   }
-	    	
+
 }
